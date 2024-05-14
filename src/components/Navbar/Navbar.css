@@ -1,0 +1,228 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: proximanova-regular-webfont,Arial,sans-serif;
+    font-size: 1rem;
+    text-align: left;
+    overflow-x: hidden;
+    margin-top: 100px;
+}
+
+#navsection {
+    height: 60px;
+}
+
+.logoImg{
+    width: 95px;
+    height: 25px;
+    margin-left: 20px;
+}
+
+.welcomeOffer button {
+    background-color: red;
+    font-size: .8vw;
+    font-weight: bold;
+    color: white;
+    border-radius: 25px;
+    padding: 5px 15px 5px 15px;
+    margin: 0 5px 0 5px;
+}
+
+.gannaOffer button {
+    font-size: .8vw;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 5px 15px 5px 15px;
+    color: red;
+    border: 1px solid red;
+    margin: 0 5px 0 5px;
+}
+
+.btn-lang{
+    margin: 0 5px 0 5px;
+}
+
+.log-in{
+    margin: 0 5px 0 5px;
+}
+
+
+.txt-style{
+    text-decoration: none;
+}
+
+
+.active{
+    color: red;
+}
+
+.nav-item{
+    font-size: 13px;
+    padding: 5px 0 5px 5px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+ 
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: red;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px red;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .search-container { 
+    position: relative; 
+    text-align: center;
+    /* padding: 0 10% 0 10%; */
+    
+  }
+  .search-container input { 
+    text-indent: 35px;
+    padding: 4px;
+    width: 32vw;
+    margin-left: 10px;
+  }
+
+  .search-container input:focus{
+    outline: none;
+  }
+
+  .search-container .search-icon { 
+    position: absolute;
+    top: 10px;
+    left: 5%;
+    font-size: 15px;
+    color: #2c2b2b;
+    font-size: large;
+  }
+
+  input::placeholder{
+    font-size: .9vw;
+    font-weight: lighter;
+}
+
+
+
+  .dropdown {
+    position: relative;
+    display: inline-block;  
+  }
+
+ 
+  
+  .languages {
+    position: absolute;
+    left: auto;
+    right: 0;
+    top:43px;
+    background-color: #f1f1f1;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;    
+    padding: 10px;
+    border-radius: 5px;    
+  }
+
+  .scrollBtn{
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 50vh;
+    margin: 20px 0 20px 0;
+  }
+
+  .lan-content{
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+  }
+
+  .toggle-label{
+    display: flex;
+    align-items: center;
+    margin: 0 5px 0 5px;
+   
+  }
+
+  .toggle-input{
+    position: absolute;
+    opacity: 0;
+  }
+
+  .sun{
+    position: absolute;
+    font-size: 3em;
+    color: hsla(0, 0%, 100%, .75);
+    /* filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5)); */
+    transform: scale(0);
+    transition: 2s ease;
+  }
+
+  .toggle-input:checked~.sun{
+    transform: scale(1) rotate(360deg);
+  }
+
+  .moon{
+    font-size: 3em;
+    /* color: hsla(0, 0%, 100%, .75); */
+    /* transform: scale(0); */
+    /* filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5)); */
+    transition: 2s ease;
+  }
+
+  .toggle-input:checked~.moon{
+    transform: rotate(360deg) scale(0);
+  }

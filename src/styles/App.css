@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+#navsection{
+  flex-wrap: nowrap;
+  height: 10vh;
+  justify-content: space-evenly;
+  width: 100%;
+}

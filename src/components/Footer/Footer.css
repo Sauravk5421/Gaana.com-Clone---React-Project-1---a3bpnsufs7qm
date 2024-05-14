@@ -1,0 +1,15 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.main-container {
+    font-family: proximanova-regular-webfont, Arial, sans-serif;
+}
+
+.vl {
+    border: 1px solid white;
+    height: 35px;
+    margin-top: 37px;
+  }
+

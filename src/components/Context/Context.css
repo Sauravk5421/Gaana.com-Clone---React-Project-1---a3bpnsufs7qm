@@ -1,0 +1,63 @@
+[data-theme="light"]{
+    --bg-color:#ffffff;
+    --text-color:rgba(0,0,0,.75);
+
+    #navsection{
+        color: #8E8E93;
+        background-color: #f5f5f5;
+    }
+
+    .txt-style{
+        color: rgba(0,0,0,.75);
+    }
+
+
+    
+}
+
+[data-theme="dark"]{
+    --bg-color:#1b1b1b;
+    --text-color:hsla(0,0%,100%,.75);
+
+    #navsection{
+        background-color: #222428;
+        color: hsla(0, 0%, 100%, .75);
+    }
+
+    .navbar-toggler-icon{
+        background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28255, 255, 255, 0.75%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e");
+    }
+
+    .themeToogle{
+        background-color: #1b1b1b;
+        color:hsla(0,0%,100%,.75) ;
+      }  
+
+      .dropbtn rect{
+        fill: #1b1b1b;
+        stroke: hsla(0,0%,100%,.75);
+      }
+
+      .dropbtn text{
+        fill: hsla(0,0%,100%,.75);
+      }
+
+      .gannaOffer button{
+        background-color: #ffffff;
+        color: #1b1b1b;
+        border: 1px solid #1b1b1b;
+      }
+
+      .btn-close{
+        background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%28255 255 255 16%27 fill=%27%23000%27%3e%3cpath d=%27M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z%27/%3e%3c/svg%3e");
+      }
+
+      .search-container input{
+        background-color: #1b1b1b;
+      }
+
+      .search-icon{
+        color: #8E8E93;
+      }
+}
+
