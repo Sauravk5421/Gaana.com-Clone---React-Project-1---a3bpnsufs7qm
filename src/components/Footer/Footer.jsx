@@ -1,6 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import "../Footer/Footer.css";
 import styled from "styled-components";
+import { useTheme } from "../Context/Context";
+
 
 const FooterLink = styled.a`
   color: #c0c0c0;
@@ -10,13 +12,17 @@ const FooterLink = styled.a`
   &:hover {
     color: #808080;
     transition: 200ms ease-in;
-  }
-`;
+  }`;
+
+
 
 function Footer() {
+
+  const {theme, toggleTheme} = useTheme();
+  
   return (
     <>
-      <Box className=" main-container bg-[#282b2f] text-white pt-8 px-[6%]">
+      <Box className=" main-container bg-[#282b2f] pt-8 px-[6%] footer-data">
         <Box className="text-center">
           <h3 className="font-bold my-4">Bas Bajna Chahiye Gaana</h3>
           <p className="text-xs font-thin">
@@ -66,23 +72,23 @@ function Footer() {
         <hr />
 
         <Box className="flex justify-center gap-x-4 py-1 text-white">
-          <FooterLink className="link-m text-white" href="#">
+          <FooterLink className="link-m footer-data" href="#">
             Terms of Use
           </FooterLink>
           <FooterLink
-            className="link-m text-white hover:text-[#808080]"
+            className="link-m footer-data hover:text-[#808080]"
             href="#"
           >
             Privacy Policy
           </FooterLink>
           <FooterLink
-            className="link-m text-white hover:text-[#808080]"
+            className="link-m footer-data hover:text-[#808080]"
             href="#"
           >
             About Us
           </FooterLink>
           <FooterLink
-            className="link-m text-white hover:text-[#808080]"
+            className="link-m footer-data hover:text-[#808080]"
             href="#"
           >
             FAQ

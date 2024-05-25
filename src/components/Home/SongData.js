@@ -1,9 +1,20 @@
 import { Box } from "@mui/material";
-import { PlayArrow } from "@mui/icons-material";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  addAlbumArtists,
+  addSongIndex,
+  addSongs,
+  albumArtistsSelector,
+  deleteAlbumArtists,
+  deleteSongs,
+  playSong,
+  updateSongs,
+} from "../../redux/songs/songSlice";
+import { useTheme } from "../Context/Context";
 
 const responsive = {
   desktop: {
@@ -20,17 +31,24 @@ const responsive = {
   },
 };
 
-function SongData({ title }) {
+function SongData({ title, isAlbum = false}) {
+
+  const {theme, toggleTheme} = useTheme();
+
   const [musicData, setMusicData] = useState([]);
-  const [albumData, setAlbumData] = useState([]);
+  const [songIndex, setSongIndex] = useState(0);
+  const [changeNavigate, setChangeNavigate] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   let url = "";
 
-  if (title === "Trending Songs") {
-    url = `https://academics.newtonschool.co/api/v1/music/song?sort={"trending":1}`;
+  if (title === "Trending Songs" ) {
+    url = `https://academics.newtonschool.co/api/v1/music/song?sort={"trending":1}&limit=100`;
   }
   if (title === "New Songs") {
-    url = `https://academics.newtonschool.co/api/v1/music/song?sort={"release":1}`;
+    url = `https://academics.newtonschool.co/api/v1/music/song?sort={"release":1}&limit=100`;
   }
   if (title === "Old Songs") {
     url = `https://academics.newtonschool.co/api/v1/music/song?sort={"release":1}`;
@@ -48,7 +66,7 @@ function SongData({ title }) {
     url = `https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"excited"}&limit=100`;
   }
   if (title === "Albums") {
-    url = `https://academics.newtonschool.co/api/v1/music/album`;
+    url = `https://academics.newtonschool.co/api/v1/music/song?sort={"trending":1}&limit=100`;
   }
   if (title === "Top Playlist") {
     url = `https://academics.newtonschool.co/api/v1/music/song?sort={"release":1}`;
@@ -57,29 +75,110 @@ function SongData({ title }) {
     url = `https://academics.newtonschool.co/api/v1/music/artist`;
   }
 
+
   const fetchMusicData = async () => {
     const URL = url;
     const headers = { projectId: "u0kdju5bps0g" };
     const response = await fetch(URL, { headers });
     const data = await response.json();
-    console.log(data.data);
     setMusicData(data.data);
   };
 
-  useEffect(() => {
-    console.log("hh");
+useEffect(() => {
+    if (changeNavigate) {
+        navigate("/player", {
+            state: {
+                isArtist: true,
+                artists: musicData[songIndex],
+            },
+        });
+    }
+}, [changeNavigate]);
+
+
+
+
+useEffect(() => {
     fetchMusicData();
-  }, []);
+}, []);
 
-  if (!musicData) {
-    return <h1>Loading..</h1>;
+
+const handleClick = async (title, index) => {
+  console.log(musicData);
+  if (isAlbum) {
+      const artists = musicData[index].artists;
+      dispatch(addAlbumArtists(artists));
+      // console.log(artist);
+      dispatch(addSongs(musicData[index].songs));
+      dispatch(addSongIndex(0));
+      dispatch(playSong());
+      navigate("/player", {
+          state: {
+              isAlbum,
+              artists: [...artists],
+              albumData: musicData[index],
+          },
+      });
+  } else {
+      if (title === "Top Artists") {
+        console.log(isAlbum,"album artist")
+          // console.log(`data: `);
+          // console.log(data[index]);
+          dispatch(deleteSongs());
+          musicData[index].songs.map(async (id, index) => {
+              const headers = { projectId: "u0kdju5bps0g" };
+              const response = await fetch(`https://academics.newtonschool.co/api/v1/music/song/${id}`, { headers });
+              const data = await response.json();
+              // console.log(data.data,"ddddd");
+              setMusicData(data.data);
+              // console.log(await response.data.data);
+              dispatch(updateSongs(data.data));
+          });
+          dispatch(deleteAlbumArtists());
+          dispatch(addSongIndex(0));
+          setSongIndex(index);
+          setChangeNavigate(true);
+      } else {
+          // console.log(`data: `);
+          // console.log(data);
+          console.log(isAlbum,"album 3")
+          dispatch(deleteAlbumArtists());
+          dispatch(addSongs(musicData));
+          dispatch(addSongIndex(index));
+          dispatch(playSong());
+          navigate("/player");
+      }
   }
+};
 
-  return (
+    const headerId = {
+        // "New Releases": "all",
+        "Romantic Songs": "album",
+        "Top Charts": "new",
+        "Sad Songs": "artist",
+    };
+
+useEffect(() => {
+  (async () => {
+    const headers = { projectId: "u0kdju5bps0g" };
+      const response = await fetch(url, { headers });
+      const data = await response.json();
+              // console.log(data.data);
+      // return (await data).data.data;
+      setMusicData(data.data);
+  })();
+}, []);
+
+
+if (!musicData) {
+  return <h1>Loading..</h1>;
+}
+
+return (
     <>
-      <Box className="px-4 md:px-8 xl:px-24 sm:mt-8 mt-4 text-black">
+      <Box className="px-4 md:px-8 xl:px-24 sm:mt-8 mt-4">
         <Box className="font-medium mb-4 flex justify-between items-center text-[#0c0f12] ">
-          <Box className="cursor-pointer text-[24px] font-[500] ">{title}</Box>
+          <Box className="cursor-pointer text-[24px] font-[500] song-data">{title}</Box>
         </Box>
         <Box>
           <Carousel
@@ -101,29 +200,17 @@ function SongData({ title }) {
             {musicData?.map((song, index) => (
               <Box
                 key={song._id}
-                component="div"
                 onClick={() => handleClick(title, index)}
-                className="cursor-pointer "
+                className="cursor-pointer"
               >
                 <img
                   src={song.thumbnail || song.image}
-                  className={`w-[100%] md:h-[192.7px] object-fill sm:h-[180px] rounded-[10px] cursor-pointer ${
+                  className={`w-[100%] md:h-[70%] object-fill sm:h-[180px] rounded-[10px] cursor-pointer ${
                     title === "Artists" && "rounded-[50%] w-[90%] "
                   } `}
                 />
 
-                <Box
-                  className={`absolute top-0 left-0 md:h-[192.7px] sm:h-[180px] w-[100%] bg-[#00000099] flex flex-col items-center justify-center opacity-0 transition-[opacity] duration-[0.40s] hover:opacity-100 [&>*]:translate-y-[20px] [&>*]:transition-transform [&>*]:duration-[0.50s] [&>*]:hover:translate-y-0 backdrop-blur-[1.5px] pb-[20px] ${
-                    title === "Artists" && "rounded-[50%] w-[85%] "
-                  } `}
-                >
-                  <Box className="truncate font-normal text-[#0c0f12] text-base text-center w-[150px] pb-[5px] ">
-                    {song.title || song.name}
-                  </Box>
-                  <PlayArrow className="text-[#ed1c24] bg-white rounded-full p-2 h-[40px] w-[40px] " />
-                </Box>
-
-                <Box className=" truncate font-normal text-[#0c0f12] text-base text-left pt-2 ">
+                <Box className=" truncate font-normal text-[#0c0f12] text-base text-left pt-2  song-data">
                   {song.title || song.name}
                 </Box>
               </Box>

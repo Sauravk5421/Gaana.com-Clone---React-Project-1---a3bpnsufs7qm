@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import './Banner.css'
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addSongIndex, addSongs, playSong } from "../../redux/songs/songSlice";
+
 
 const bannerData = [
     {
@@ -48,11 +53,19 @@ const responsive = {
         partialVisibilityGutter: 20,
     },
 };
-const Banner = () => {
+
+
+
+function Banner  () {
    
-    
+
+    const [changeNavigate, setChangeNavigate] = useState(false);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const getUrl = (id) => {
+
         let url = "";
         if (id === 1) {
             url = `https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"excited"}`;
@@ -63,24 +76,29 @@ const Banner = () => {
         if (id === 3) {
             url = `https://academics.newtonschool.co/api/v1/music/song?sort={"release":1}`;
         }
+        if (id === 4) {
+            url = `https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"excited"}`;
+        }
+        if (id === 5) {
+            url = `https://academics.newtonschool.co/api/v1/music/song?filter={"mood":"romantic"}`;
+        }
+        if (id === 6) {
+            url = `https://academics.newtonschool.co/api/v1/music/song?sort={"release":1}`;
+        }
         
-
         return url;
     };
 
     const getData = async (url) => {
-        const projectId = import.meta.env.VITE_PROJECT_ID;
         const response = await axios({
             url: url,
             method: "get",
             headers: {
-                projectId: projectId,
+                projectId: "u0kdju5bps0g",
             },
         });
-        // console.log(await response.data.data);
         dispatch(addSongs(response.data.data));
         dispatch(addSongIndex(0));
-        // setData(response.data.data);
     };
 
     const handleClick = (id) => {
@@ -94,33 +112,29 @@ const Banner = () => {
     return (
         <Box className="px-4 pt-8">
             <Carousel 
-            centerMode={true}
-            swipeable={false}
-            draggable={false}
-            showDots={false}
-            // showDots={true}
-            responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
-            // autoPlay={false}
-            autoPlay={true}
-            infinite={true}
-            autoPlaySpeed={4000}
-            keyBoardControl={true}
-            transitionDuration={500}
-            containerClass="carousel-container [&>img]:object-contain "
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px pr-[15px] ">
-            {bannerData.map((data) => (
+                centerMode={true}
+                swipeable={false}
+                draggable={false}
+                showDots={false}
+                responsive={responsive}
+                ssr={true} 
+                autoPlay={true}
+                infinite={true}
+                autoPlaySpeed={4000}
+                keyBoardControl={true}
+                transitionDuration={500}
+                containerClass="carousel-container [&>img]:object-contain "
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-40-px pr-[15px] ">
+                {bannerData.map((data) => (
                     <img
                         key={data.id}
                         src={data.url}
                         className="w-[100%]  md:h-[240px] object-fill sm:h-[160px] rounded-[10px] cursor-pointer "
                         onClick={() => handleClick(data.id)}
                     />
-                ))}
-</Carousel>
-        
-  
+                    ))}
+            </Carousel>
         </Box>
     );
 };

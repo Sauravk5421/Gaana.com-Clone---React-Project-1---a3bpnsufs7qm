@@ -10,18 +10,32 @@ body{
 }
 
 #navsection {
-    height: 60px;
+    /* height: 50px; */
+    width: 100%;
 }
 
 .logoImg{
-    width: 95px;
-    height: 25px;
+    width: 93px;
+    height: 22px;
     margin-left: 20px;
+}
+
+.navbar-expand{
+  flex-wrap: nowrap;
+}
+
+.theme-icon{
+  font-size: 8px;
+}
+
+.offcanvas{
+  max-width: 300px;
+  overflow-y: hidden;
 }
 
 .welcomeOffer button {
     background-color: red;
-    font-size: .8vw;
+    font-size: 7px;
     font-weight: bold;
     color: white;
     border-radius: 25px;

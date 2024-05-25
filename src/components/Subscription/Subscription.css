@@ -7,3 +7,13 @@
     width: 15vw;
     height: 15vh;
 }
+
+.selected-cards {
+   background-color:  rgb(235, 29, 34);
+   color: rgb(222, 222, 222);
+}
+
+.not-selected-cards {
+    background-color: gray;
+    color: black;
+}

@@ -3,27 +3,21 @@ import Navbar from "../Navbar/Navbar";
 import Banner from "../Banners/Banners";
 import HeaderMenu from "../Navbar/HeaderMenu";
 import SongData from "./SongData";
-import { useState } from "react";
-import { useEffect } from "react";
-import Subscription from "../Subscription/Subscription";
+import { useState, useEffect } from "react";
 import Footer from "../Footer/Footer";
-import Player from "../Player/Player";
-import MusicDetailPage from "../MusicDetail/MusicDetailPage";
+
 
 function HomePage() {
   return (
-    <Box>
+    <Box>      
       <Box>
-        <Navbar className="z-40 " />
-      </Box>
-      <Box className="">
         <Banner/>
       </Box>
 
       <div>
         <Box className="mb-[32px] ">
           <SongData title={"Trending Songs"} />
-          <SongData title={"New Songs"} isAlbum={true} />
+          <SongData title={"New Songs"}/>
           <SongData title={"Old Songs"} />
           <SongData title={"Romantic Songs"} />
           <SongData title={"Happy Songs"} />
@@ -32,19 +26,12 @@ function HomePage() {
           <SongData title={"Albums"} />
           <SongData title={"Top Playlist"} />
           <SongData title={"Top Artists"} />
-          <SongData title={"Radio"} />
-          <SongData title={"Podcast"} />
-          <SongData title={"My Music"} />
         </Box>
       </div>
 
-      
       <div>
-        <Footer />
+        <Footer/>
       </div>
-      <div>
-        <Player />
-      </div> 
     </Box>
   );
 }

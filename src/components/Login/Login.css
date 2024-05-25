@@ -5,15 +5,44 @@
     justify-content: center;
     align-items: center;
     align-content: center;
-    padding: 12% 5% 10% 5%;  
+
+    padding: 12% 5% 10% 5%; 
 }
 
 
 .login-logo{
-    width: 12vw;
+    width: auto;
     height: 7vh;
+    margin-top: 20px;
 }
 
 .login-phone{
-    background-color: red;
+    background-color: #FF0000;
 }
+
+
+
+legend{
+    color: #fff;;
+    font-size: 1vw;
+    /* background-color: red; */
+}
+  
+
+  fieldset{
+    border-radius: 5px;
+    padding: 10px;
+    /* outline: 1px solid #fff; */
+    /* margin-bottom: 15px; */
+  }
+  
+  .input-btn{
+    padding: 5px;
+    /* border: none; */
+    width: 95%; 
+    outline: 1px solid #fff;
+    border-radius: 5px;
+    background-color: rgb(36, 35, 35);
+  }
+  
+ 
