@@ -29,6 +29,7 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import DoneIcon from "@mui/icons-material/Done";
 import { useTheme } from "../Context/Context";
+import "../Navbar/Navbar.css"
 
 
 function Navbar() {
@@ -133,12 +134,12 @@ function Navbar() {
               <span className="navbar-toggler-icon text-xs"></span>
             </button>
 
-            <Link to={"/"} className="navbar-brand" href="#">
+            <Link to={"/"} className="" href="#">
               <img src={logoImg} className="logoImg" alt="logo" />
             </Link>
 
-            <div className="d-flex search-container hidden md:block" role="search">
-              <SearchIcon className="hidden md:block search-icon" />
+            <div className="search-container hidden md:block" role="search">
+              <SearchIcon className="search-icon hidden md:block" />
               <input
                 className="hidden md:block search-input rounded-pill w-full"
                 type="search"
@@ -149,10 +150,9 @@ function Navbar() {
                 }}
               />
 
-              {/* {console.log("searchText: " + searchText)} */}
               {searchText && (
                 <>
-                  <List className="md:block absolute bg-[#1b1a1a] text-[#ffffff] mt-[55px]">
+                  <List className="hidden md:block absolute bg-[#1b1a1a] text-[#ffffff] mt-[55px]">
                     {/* No Songs found. Give full title. */}
                     <ListItem>No Songs found. Give full title.</ListItem>
                   </List>
@@ -319,35 +319,34 @@ function Navbar() {
               )}
             </div>
 
-            <label className="toggle-label theme-icon">
+            <label className="mx-2 theme-icon hidden min-[800px]:block">
               <input
                 onClick={toggleTheme}
-                className="toggle-input "
+                className="toggle-input hidden min-[800px]:block "
                 type="checkbox"
               />
               <LightModeOutlinedIcon className="sun hidden min-[800px]:block" />
               <DarkModeOutlinedIcon className="moon hidden min-[800px]:block" />
-              <span className="toggle "></span>
+              <span className="toggle"></span>
             </label>
 
             {user ? null : (
               <span
-                className="hover:opacity-60 cursor-pointer flex hidden min-[800px]:block"
+                className="hover:opacity-60 cursor-pointer hidden min-[800px]:block"
                 onClick={() => !user && handleModal()}
               >
-                <div onClick={()=>{setLoginPage(false);}} className="text-xs ml-2 font-light">
+                <div onClick={()=>{setLoginPage(false);}} className="text-xs ml-2 font-light w-[90px]">
                   Log In / Sign Up
                 </div>
               </span>
             )}
 
             <div
-              className={` block ${user ? "" : "hidden"} h-full text-white`}
+              className={` block ${user ? "" : "hidden"} h-full`}
               onClick={() => handleDrawerToggle()}
             >
               <div
-                className="relative h-full flex items-center"
-                data-headlessui-state=""
+                className="h-full flex items-center"
               >
                 <button
                   className="ml-[1.375rem]"
@@ -394,8 +393,8 @@ function Navbar() {
               {user && (
                 <Box className="flex flex-col px-4">
                   <Box className="flex items-center gap-3 hover:opacity-60">
-                    <span className="hover:opacity-60 cursor-auto flex ">
-                      <span className="text-[#fdfdfd] ">
+                    <span className="hover:opacity-60 cursor-auto flex gap-3">
+                      <span className=" ">
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -421,7 +420,7 @@ function Navbar() {
                           </svg>
                         </span>
                       </span>
-                      <div className=" ml-2 font-light text-[#fdfdfd] ">
+                      <div className="font-light">
                         Profile
                       </div>
                     </span>
@@ -444,31 +443,33 @@ function Navbar() {
                     }}
                     className="flex items-center gap-3 hover:opacity-60"
                   >
-                    <div className="hover:opacity-60 cursor-pointer flex ">
-                      <Upgrade className="text-[#fdfdfd] text-[24px] " />
+                    <div className="hover:opacity-60 cursor-pointer flex gap-3 mb-4">
+                      <Upgrade className=" text-[24px] " />
                       Update Password
                     </div>
                   </Box>
 
                   {/* My Music */}
-                  <Link to="/my-music">
+                  <Box >
+                  <Link to="/my-music" style={{textDecorationLine:"none"}}>
                     <div
-                      className={`items-center gap-3 hover:opacity-60 cursor-pointer m-5 px-4 `}
+                      className={`hover:opacity-60 cursor-pointer text-[#a3a3a3]` }
                       onClick={() => !user && handleModal()}
                     >
-                      <div className="font-light text-[#fdfdfd] opacity-80 ">
-                        <LibraryMusic className="h-[24px] w-[24px] " />
+                      <div className="font-light opacity-80 flex gap-3 mb-4">
+                        <LibraryMusic className="h-[24px]" />
                         My Music
                       </div>
                     </div>
                   </Link>
+                  </Box>
 
                   <Box
-                    className="flex items-center gap-3 hover:opacity-60 cursor-pointer mb-5 px-4  "
+                    className="flex items-center gap-3 hover:opacity-60 cursor-pointer mb-5 "
                     onClick={handleLogout}
                   >
                     <Logout />
-                    <span className="font-light opacity-80 text-[#fdfdfd]">
+                    <span className="opacity-80">
                       Sign Out
                     </span>
                   </Box>
@@ -477,7 +478,7 @@ function Navbar() {
             </Box>
           </div>
           
-          <div className="d-flex search-container md:hidden" role="search">
+          <div className="container-fluid d-flex search-container-bottom md:hidden " role="search">
               <SearchIcon className="md:hidden search-icon" />
               <input
                 className="md:hidden search-input rounded-pill"

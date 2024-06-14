@@ -20,6 +20,15 @@
       color: rgba(0,0,0,.75);
     }
 
+    .player-container{
+      background-color: hsla(0,0%,100%,.75);
+      color: rgba(0,0,0,.75);
+    }
+    .music-container{
+      background-color: hsla(0,0%,100%,.75);
+      color: rgba(0,0,0,.75);
+    }
+
 
     
 }
@@ -74,6 +83,17 @@
       }
 
       .footer-data{
+        color: hsla(0,0%,100%,.75);
+        background-color: rgba(0,0,0,.75);
+      }
+
+      .player-container{
+        color: hsla(0,0%,100%,.75);
+        background-color: rgba(0,0,0,.75);
+      }
+
+      
+      .music-container{
         color: hsla(0,0%,100%,.75);
         background-color: rgba(0,0,0,.75);
       }

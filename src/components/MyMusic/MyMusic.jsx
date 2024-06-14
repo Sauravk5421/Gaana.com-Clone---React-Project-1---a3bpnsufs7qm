@@ -72,7 +72,7 @@ const MyMusic = () => {
   }, [changeNavigate]);
   return (
     <>
-      <Box className="h-full min-h-[450px] pt-[30px]">
+      <Box className="h-full min-h-[450px] pt-[30px] mb-20">
         {isEmptySongs ? (
           <>
             <EmptyLikedSongs />
@@ -80,7 +80,7 @@ const MyMusic = () => {
         ) : (
           <>
             <Box className=" px-4">
-              <Box className="text-title text-4xl my-10 font-bold text-[#1b1b1b] ">
+              <Box className="text-title text-4xl my-10  font-bold ">
                 Favourite Songs
               </Box>
               <Box className="flex flex-wrap gap-x-5 gap-y-8">
@@ -94,7 +94,7 @@ const MyMusic = () => {
                       src={song.thumbnail || song.image}
                       className={`w-[200px] object-fill rounded-[10px] cursor-pointer `}
                     />
-                    <Box className="truncate font-normal text-[#0c0f12] text-base text-left pt-2 w-[200px]">
+                    <Box className="truncate font-normal text-base text-left pt-2 w-[200px]">
                       {song.title || song.name}
                     </Box>
                   </Box>

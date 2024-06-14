@@ -53,14 +53,14 @@ const FavoriteButton = ({ userData, currSong }) => {
         <>
             <Box className="">
                 <button
-                    className="border-[#e8e8e8] rounded-full border-[1px] text-[#1b1b1b] h-10 w-10 text-sm "
+                    className="rounded-full border-[2px] border-[#4e4d4d] h-8 w-8 text-sm "
                     onClick={handleLikedCliked}
                 >
                     {/* {console.log("isLiked: " + isLiked)} */}
                     {isLiked ? (
-                        <Favorite className="text-[24px] text-[#ed1c24] " />
+                        <Favorite className=" text-[#ed1c24] " />
                     ) : (
-                        <FavoriteBorder className="text-[24px] text-[#1b1b1b] " />
+                        <FavoriteBorder className="text-[24px] " />
                     )}
                 </button>
             </Box>

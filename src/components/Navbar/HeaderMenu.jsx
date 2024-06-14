@@ -5,6 +5,9 @@ import { useTheme } from "../Context/Context";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { userSelector } from "../../redux/users/userSlice";
+import LoginModal from "../Login/LoginModal";
+
 import {
   isSubscriptionPageSelector,
   setIsSubscriptionPage,
@@ -20,10 +23,10 @@ import {
   updateSongs,
 } from "../../redux/songs/songSlice";
 
-
-function HeaderMenu () {
-
+function HeaderMenu() {
   const { theme, toggleTheme } = useTheme();
+  const userData = useSelector(userSelector);
+  const user = userData ? userData.data : null;
 
   const containerStyle = {
     scrollbarWidth: "none",
@@ -43,15 +46,15 @@ function HeaderMenu () {
     "Albums",
   ];
 
-//   const albumId = {
-//     "Trending Songs": "#trending",
-//     "New Songs": "#songs",
-//     "Romantic Songs": "#romanticsongs",
-//     "Happy Songs": "#happysongs",
-//     "Sad Songs":"sadsongs",
-//     "Excited Songs":"excitedsongs",
-//     "Albums": "#albums",
-//   };
+  //   const albumId = {
+  //     "Trending Songs": "#trending",
+  //     "New Songs": "#songs",
+  //     "Romantic Songs": "#romanticsongs",
+  //     "Happy Songs": "#happysongs",
+  //     "Sad Songs":"sadsongs",
+  //     "Excited Songs":"excitedsongs",
+  //     "Albums": "#albums",
+  //   };
 
   const [musicData, setMusicData] = useState([]);
   const [songIndex, setSongIndex] = useState(0);
@@ -60,6 +63,17 @@ function HeaderMenu () {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [openModal, setOpenModal] = useState(false);
+  const [loginpage, setLoginPage] = useState(false);
+
+  const handleModal = () => {
+    setOpenModal((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    dispatch(deleteUser());
+  };
 
   const fetchMusicData = async (url) => {
     const URL = url;
@@ -83,7 +97,7 @@ function HeaderMenu () {
   const handleClick = async (title, index) => {
     let isAlbum = false;
     let url = "";
-    index =0;
+    index = 0;
     console.log(title, "title");
     if (title === "Trending Songs") {
       url = `https://academics.newtonschool.co/api/v1/music/song?sort={"trending":1}&limit=100`;
@@ -169,7 +183,7 @@ function HeaderMenu () {
         >
           <Box className="pb-3 flex overflow-y-auto gap-4 md:gap-8 lg:gap-6 xl:gap-8 items-center pr-4 lg:min-h-[40px] min-h-[24px] ">
             <Box
-              className="text-xs cursor-pointer text-base font-light hover:underline decoration-orange-500 decoration-2 underline-offset-[8px] first-of-type:ml-0  box-border whitespace-pre"
+              className="text-xs cursor-pointer font-light hover:underline decoration-orange-500 decoration-2 underline-offset-[8px] first-of-type:ml-0  box-border whitespace-pre"
               onClick={() => navigate("/")}
             >
               All
@@ -192,16 +206,30 @@ function HeaderMenu () {
               </Box>
             ))}
             <Box
-              className="text-xs cursor-pointer text-base font-light hover:underline decoration-orange-500 decoration-2 underline-offset-[8px] first-of-type:ml-0  box-border whitespace-pre"
-              onClick={() => navigate("/my-music")}
+              className="text-xs cursor-pointer font-light hover:underline decoration-orange-500 decoration-2 underline-offset-[8px] first-of-type:ml-0  box-border whitespace-pre"
+              onClick={() => {
+                user && navigate("/my-music");
+                {
+                  !user && handleModal();
+                }
+              }}
             >
               My Music
             </Box>
+
+            {openModal && (
+              <LoginModal
+                open={openModal}
+                handleModal={handleModal}
+                loginpage={loginpage}
+                setLoginPage={setLoginPage}
+              />
+            )}
           </Box>
         </Box>
       </Box>
     </Box>
   );
-};
+}
 
 export default HeaderMenu;

@@ -66,7 +66,9 @@ function Subscription() {
   }, []);
 
   return (
-    <Box className="bg-[#1b1b1b]">
+    <>
+    <Box className=" absolute top-0">
+      <Box className="bg-[#1b1b1b]">
       <Box className="flex justify-around text-[#FF0000] py-4 ">
         <Link to={'/'} ><img className="subsImage" src="./assets/logo/Gaana_logo.png" /></Link>
         {/* <button>Log In / Sign Up</button> */}
@@ -131,7 +133,7 @@ function Subscription() {
           </div>
         </div>
         <Box
-          className={` border-[#e8eaed] absolute z-30 top-[30%] mt-2 w-64 h-fit bg-[#1c1b1b] right-0 pt-5 rounded-xl stroke-2 -mr-5 shadow-popover transform opacity-100 scale-100 ${
+          className={` border-[#e8eaed] absolute z-30 mt-2 w-48 h-fit bg-[#292828] right-20 top-[1.5%] rounded-xl stroke-2 shadow-popover transform opacity-100 scale-100 ${
             !user && "lg:hidden"
           } ${mobileOpen ? "block" : "hidden"} `}
         >
@@ -143,10 +145,10 @@ function Subscription() {
               }}
             >
               <Box
-                className="flex items-center gap-3 hover:opacity-60 cursor-pointer mb-5 px-4  "
+                className="flex items-center gap-3 hover:opacity-60 cursor-pointer p-2"
                 onClick={handleLogout}
               >
-                <Logout />
+                <Logout className="text-[#fdfdfd]"/>
                 <span className="font-light opacity-80 text-[#fdfdfd]">
                   Log Out
                 </span>
@@ -156,9 +158,9 @@ function Subscription() {
         </Box>
       </Box>
       <Box className="px-[20%]">
-        <Box className="text-white text-center p-5">
-          <h4>
-            Get <span className="text-[#FF0000]">Gaana Plus</span> to listen
+        <Box className="text-white text-center p-5 ">
+          <h4 className="min-w-[200px]">
+            Get <span className=" text-[#FF0000]">Gaana Plus</span> to listen
             ad-free, offline, high quality music & much more!
           </h4>
         </Box>
@@ -194,16 +196,15 @@ function Subscription() {
               onClick={() => handleSubscriptionPlan("Yearly", 399)}
             >
               <Box
-                className={` rounded-md plans-cards ${
+                className={`min-w-[300px] rounded-md plans-cards ${
                   paymentDetails.amount === 399
                     ? "selected-cards"
                     : "not-selected-cards"
                 } `}
               >
-                <Box className="p-3 mb-3 flex justify-between rounded-md">
+                <Box className="p-3 mb-3 flex justify-between rounded-md ">
                   <h5>1 Month Gaana Plus</h5>
-                  <h5>₹ 99</h5>
-                  <CheckCircleIcon />
+                  <h5>₹ 99 <CheckCircleIcon className="ml-2"/></h5>
                 </Box>
               </Box>
             </Box>
@@ -213,7 +214,7 @@ function Subscription() {
               onClick={() => handleSubscriptionPlan("3 Months", 129)}
             >
               <Box
-                className={`rounded-md plans-cards ${
+                className={`min-w-[300px] rounded-md plans-cards ${
                   paymentDetails.amount === 129
                     ? "selected-cards"
                     : "not-selected-cards"
@@ -221,8 +222,7 @@ function Subscription() {
               >
                 <Box className="p-3 mb-3 flex justify-between rounded-md">
                   <h5>1 Year Gaana Plus</h5>
-                  <h5>₹ 299</h5>
-                  <CheckCircleIcon />
+                  <h5>₹ 299 <CheckCircleIcon className="ml-2"/></h5>
                 </Box>
               </Box>
             </Box>
@@ -232,7 +232,7 @@ function Subscription() {
               onClick={() => handleSubscriptionPlan("Monthly", 49)}
             >
               <Box
-                className={`rounded-md plans-cards ${
+                className={`min-w-[300px] rounded-md plans-cards ${
                   paymentDetails.amount === 49
                     ? "selected-cards"
                     : "not-selected-cards"
@@ -242,8 +242,8 @@ function Subscription() {
                   <h5>
                     1 Month Gaana Plus Trial <span className="text-xs bg-[#028A0F] p-1 rounded-full">Best Value</span>
                   </h5>
-                  <h5>₹ 1</h5>
-                  <CheckCircleIcon />
+                  <h5>₹ 1 <CheckCircleIcon className="ml-2"/></h5>
+                  
                 </Box>
               </Box>
             </Box>
@@ -368,10 +368,15 @@ function Subscription() {
           setLoginPage={setLoginPage}
         />
       )}
-      {isProceedPayment&& 
-      <Payment/>}
-      <Footer/>
+      </Box>
+      <Box>
+        {isProceedPayment&& 
+        <Payment/>}
+        <Footer/>
+      </Box>
     </Box>
+    
+    </>
   );
 }
 

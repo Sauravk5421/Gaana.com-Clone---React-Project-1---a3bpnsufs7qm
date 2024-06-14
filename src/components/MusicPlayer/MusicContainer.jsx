@@ -99,8 +99,8 @@ const MusicContainer = () => {
 
   return (
     <>
-      <Box className="text-[#1b1b1b]">
-        <Box className="md:hidden md:pl-4">
+      <Box className="music-container">
+        <Box className="md:hidden md:pl-4 text-center">
           <Box className="text-[25px] font-[400]">
             <audio src={currSong.audio_url} ref={audioPlayer} />
             {isArtist
@@ -112,7 +112,7 @@ const MusicContainer = () => {
               : currSong.title}
             {/* {currSong.title} */}
           </Box>
-          <Box className="text-xs text-[#767676]">{songs.length} songs</Box>
+          <Box className="text-sm mt-1">{songs.length} songs</Box>
           {/* <Box className="text-[#767676] text-xs my-1">
             {isLikedSongs
               ? currSong.artist.map((artistId) => {
@@ -121,34 +121,39 @@ const MusicContainer = () => {
                 })
               : currSong.artist.map((data) => `${data.name} | `)}
           </Box> */}
-          <Box className="text-[#767676] text-xs mb-4">
-          <p>{ isLiked ? "Favourites songs created by you" : "Playlist created by Gaana" }</p>
+          <Box className="text-[#767676] text-sm mb-4 mt-2">
+            <p>
+              {isLiked
+                ? "Favourites songs created by you"
+                : "Playlist created by Gaana"}
+            </p>
           </Box>
         </Box>
         <Box className="mt-6">
-          <Grid container>
-            <Grid item xs={3} sm={3} md={3} lg={3} className="text-[#1b1b1b]">
-              <Box className="md:table-cell hidden text-xs ml-2 font-normal pb-5 ">
-                Track
-              </Box>
-            </Grid>
-            <Grid item xs={3} sm={3} md={3} lg={3}>
-              <Box className="md:table-cell hidden text-xs pl-2.5 text-xs font-normal leading-4 w-[30%] md:w-[24%] lg:w-[20%] pb-5 ">
-                {isLiked ? "Created At" : "Artists"}
-              </Box>
-            </Grid>
-            <Grid item xs={3} sm={3} md={3} lg={3}>
-              <Box className="md:table-cell md:pl-0.5 hidden text-xs   tracking-widest font-normal  w-[15%] md:w-[18%] lg:w-[12%] pb-5 ">
-                Album
-              </Box>
-            </Grid>
-            <Grid item xs={3} sm={3} md={3} lg={3}>
-              <Box className="md:table-cell md:pl-0.5 hidden text-xs font-normal leading-4 w-[15%] md:w-[18%] lg:w-[12%] pb-5 ">
-                Duration
-              </Box>
-            </Grid>
-          </Grid>
+          <Box className="flex justify-around">
+            {/* <Grid item xs={3} sm={3} md={3} lg={3} className=""> */}
+            <Box className="md:table-cell hidden text-xs ml-2 font-normal pb-5 ">
+              Track
+            </Box>
+            {/* </Grid> */}
+            {/* <Grid item xs={3} sm={3} md={3} lg={3}> */}
+            <Box className="md:table-cell hidden pl-2.5 text-xs font-normal pb-5 ">
+              {isLiked ? "Created At" : "Artists"}
+            </Box>
+            {/* </Grid> */}
+            {/* <Grid item xs={3} sm={3} md={3} lg={3}> */}
+            <Box className="md:table-cell md:pl-0.5 hidden text-xs pb-5 ">
+              Album
+            </Box>
+            {/* </Grid> */}
+            {/* <Grid item xs={3} sm={3} md={3} lg={3}> */}
+            <Box className="md:table-cell md:pl-0.5 hidden text-xs font-normal pb-5 ">
+              Duration
+            </Box>
+            {/* </Grid> */}
+          </Box>
 
+          
           <Box
             className=" py-2 md:pr-3 rounded-lg border-transparent border cursor-pointer hover:shadow-dark hover:border-[#3d464d] "
             onClick={() => handleCurrSongClick()}
@@ -212,16 +217,16 @@ const MusicContainer = () => {
                   </Box>
                 </Grid>
                 <Grid item xs={3} sm={3} md={3} lg={3}>
-                  <Box className="md:flex md:pl-0.5 hidden text-xs text-[#1b1b1b] opacity-70 items-center font-normal h-full">
+                  <Box className="md:flex md:pl-0.5 hidden text-xs text-[#767676]  items-center font-normal h-full">
                     {currSong.title}
                   </Box>
                 </Grid>
                 <Grid item xs={3} sm={3} md={3} lg={3}>
-                  <Box className="md:flex md:pl-0.5 hidden text-xs text-[#1b1b1b] opacity-70 items-center  font-normal h-full">
+                  <Box className="md:flex md:pl-0.5 hidden text-xs text-[#767676] items-center  font-normal h-full">
                     {duration === "NAN" ? "00:00" : formatTime(duration)}
                   </Box>
                 </Grid>
-                <Grid
+                {/* <Grid
                   item
                   xs={3}
                   sm={3}
@@ -230,10 +235,13 @@ const MusicContainer = () => {
                   className="md:hidden text-[#767676] py-2 mr-3"
                 >
                   <PlayArrow />
-                </Grid>
+                </Grid> */}
               </Grid>
             </Box>
           </Box>
+
+    
+            
 
           {songs?.map(
             (song, index) =>
@@ -271,7 +279,7 @@ const MusicContainer = () => {
                         </Box>
                       </Grid>
                       <Grid item xs={3} sm={3} md={3} lg={3}>
-                        <Box className="md:flex hidden text-xs pl-0.5 text-[#767676] opacity-70 font-normal items-center text-center h-full leading-4 truncate mr-[40px] ">
+                        <Box className="md:flex hidden text-xs pl-0.5 text-[#767676]  font-normal items-center text-center h-full leading-4 truncate mr-[40px] ">
                           {isAlbum
                             ? song.artist.map((artistId) => {
                                 const artist = artists.find(
@@ -290,18 +298,18 @@ const MusicContainer = () => {
                         </Box>
                       </Grid>
                       <Grid item xs={3} sm={3} md={3} lg={3}>
-                        <Box className="md:flex md:pl-0.5 hidden text-xs text-[#767676] opacity-70 items-center justify-start font-normal h-full">
+                        <Box className="md:flex md:pl-0.5 hidden text-xs text-[#767676] items-center justify-start font-normal h-full">
                           <Box className="flex justify-center items-center min-w-[73px] text-center ">
                             {song.title}
                           </Box>
                         </Box>
                       </Grid>
                       <Grid item xs={3} sm={3} md={3} lg={3}>
-                        <Box className="md:flex md:pl-0.5 hidden text-xs text-[#1b1b1b] opacity-70 items-center tracking-widest font-normal leading-4 h-full">
+                        <Box className="md:flex md:pl-0.5 hidden text-xs text-[#767676]  items-center tracking-widest font-normal leading-4 h-full">
                         {duration === "NAN" ? "00:00" : formatTime(duration)}
                         </Box>
                       </Grid>
-                      <Grid
+                      {/* <Grid
                         item
                         xs={3}
                         sm={3}
@@ -310,19 +318,19 @@ const MusicContainer = () => {
                         className="md:hidden text-[#767676] py-2 mr-3"
                       >
                         <PlayArrow />
-                      </Grid>
+                      </Grid> */}
                     </Grid>
                   </Box>
                 </Box>
               )
           )}
           <Box
-            className={`flex justify-center w-[80%] p-3 ${
+            className={`flex justify-center p-3 ${
               pagination + 1 >= songs.length && "hidden"
             } `}
           >
             <button
-              className={`min-[370px]:px-3 cursor-pointer rounded-3xl border-[1px] p-2 bg-[#0c0f12] hover:bg-[#21252d] text-[#b7c0c4] hover:text-[#f5f7f7] pr-2 pl-3 text-sm font-medium `}
+              className={`bg-[#c7c5c5] min-[370px]:px-3 cursor-pointer rounded-3xl border-[1px] p-2 px-5 hover:bg-[#7f8181] pr-2 pl-3 text-sm font-medium `}
               onClick={() => handleShowMore()}
             >
               Show More

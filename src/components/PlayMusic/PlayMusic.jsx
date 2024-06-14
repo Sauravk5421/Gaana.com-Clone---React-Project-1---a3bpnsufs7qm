@@ -13,6 +13,8 @@ import {
 import { Box, Slider } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { userSelector } from "../../redux/users/userSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   albumArtistsSelector,
   currentSongIndexSelector,
@@ -28,6 +30,7 @@ import { isSubscriptionPageSelector } from "../../redux/subscription/subscriptio
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import FavoriteButton from "../MusicPlayer/FavoriteButton";
 
 function PlayMusic () {
   const songs = useSelector(songSelector);
@@ -39,9 +42,10 @@ function PlayMusic () {
 
   const currSong = songs[currSongInd];
   const audioPlayer = useRef();
-  const [isPlaying, setIsPlaying] = useState(false);
-//   const isPlaying = useSelector(isPlayingSelector);
-  
+  // const [isPlaying, setIsPlaying] = useState(true);
+  const isPlaying = useSelector(isPlayingSelector);
+  const loaction = useLocation();
+  const isLiked = loaction?.state?.isLiked || false;
 
   const [volume, setVolume] = useState(30);
   const [mute, setMute] = useState(false);
@@ -49,13 +53,15 @@ function PlayMusic () {
   const [duration, setDuration] = useState(0);
   const [maxIndex, setMaxIndex] = useState(true);
   const [volumeHover, setVolumeHover] = useState(false);
+  const userData = useSelector(userSelector);
+  const user = userData ? userData.data : null;
+  // console.log(user,"user")
 
 //   useEffect(() => {
 //     isPlaying = false;
 //   }, []);
 
   useEffect(() => {
-    console.log(isPlaying,"pla")
     if (audioPlayer) {
       audioPlayer.current.volume = volume / 100;
     }
@@ -119,7 +125,6 @@ function PlayMusic () {
       audioPlayer.current.pause();
       dispatch(pauseSong());
     }
-    setIsPlaying((prev)=>!prev);
   };
 
   const skipNextSong = () => {
@@ -218,7 +223,7 @@ function PlayMusic () {
                   </Box>
                 </Box>
               </Box>
-              <Box className="ml-1.5 truncate sm:max-w-[11rem] lg:max-w-[16rem] ">
+              <Box className="ml-1.5 truncate sm:max-w-[10rem] lg:max-w-[15rem] ">
                 <Box className="font-normal text-sm leading-6 truncate text-[#f7f5f5] ">
                   {currSong.title}
                 </Box>
@@ -239,11 +244,23 @@ function PlayMusic () {
               </Box>
             </Box>
             {/* Like Button */}
-            <Box className="flex gap-x-3 text-xs font-light">
-              <FavoriteBorderIcon className="text-white font-light" />
-              <MoreVertIcon className="text-white" />
+            <Box className="flex justify-start content-center gap-x-3 text-xs font-light mx-3">
+              {/* <FavoriteBorderIcon className="hidden md:block text-white font-light" /> */}
+              <Box className="text-[#767676] gap-x-3 p-1 hidden md:block">
+                  {user && !isLiked && (
+                    <FavoriteButton
+                      className="bg-[#FF0000]"
+                      key={currSong._id}
+                      userData={userData}
+                      currSong={currSong}
+                    />
+                  )}
+                </Box>
+              <Box>
+                <MoreVertIcon className="mt-2 hidden md:block text-white" />
+              </Box>
             </Box>
-            <Box className="ml-2 lg:block text-xs text-[#9da0a3] my-auto border-1 rounded-full p-1">
+            <Box className="hidden md:block min-w-[80px] ml-2 text-xs text-[#9da0a3] border-1 rounded-full p-1">
                 {formatTime(elapsed)} /{formatTime(duration)}
               </Box>
             {/* Play */}
@@ -287,23 +304,23 @@ function PlayMusic () {
             </Box>
             <Box className="flex-grow text-right mr-4 flex justify-end sm:flex-1 h-full">
              
-              <Box className="flex mr-6 group">
+              <Box className="flex mr-14 group">
                 <Box className="relative flex my-auto text-[#e50019] ">
                   <VolumeBtns />
                 </Box>
               </Box>
             </Box>
             <Box>
-                <select className="border-1 px-1 p-1 bg-[#222428] rounded-full mr-2 text-sm">
+                <select className="hidden md:block border-1 px-2 p-1 bg-[#222428] rounded-full mr-4 text-sm">
                     <option>Audio:High</option>
                     <option>Audio:Medium</option>
                     <option>Audio:Low</option>
                 </select>
-                <KeyboardArrowUpIcon />
+                {/* <KeyboardArrowUpIcon /> */}
             </Box>
           </Box>
 
-          <Box className="absolute top-0 w-full player_range__Y0p1N ">
+          <Box className="absolute top-0 w-full">
             <Box className="h-8 absolute -bottom-4 w-full cursor-pointer ">
               {/* timer slider */}
               <Slider
@@ -322,7 +339,7 @@ function PlayMusic () {
           {/* {console.log(`volumeHover: ${volumeHover}`)} */}
           <Box
             // sx={{ height: 100 }}
-            className="absolute bottom-14 ml-[78%] w-[20px] min-h-[22px]"
+            className="absolute bottom-11 right-[20%]"
             onMouseOver={() => {
               // console.log("volume up");
               setVolumeHover(true);

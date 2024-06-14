@@ -12,7 +12,8 @@ import { addSongIndex, addSongs, playSong } from "../../redux/songs/songSlice";
 const bannerData = [
     {
         id: 1,
-        url: "./assets/Banner/size_l_1707299661.webp",
+        url: "../assets/Banner/size_l_1707299661.webp",
+       
     },
     {
         id: 2,
@@ -110,7 +111,7 @@ function Banner  () {
 
 
     return (
-        <Box className="px-4 pt-8">
+        <Box className="px-4 pt-8 sm:mt-40 md:mt-0">
             <Carousel 
                 centerMode={true}
                 swipeable={false}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HomePage from "./Home/HomePage";
 import Navbar from "./Navbar/Navbar";
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, HashRouter } from 'react-router-dom';
 import Subscription from "./Subscription/Subscription";
 import { ThemeProvider } from "./Context/Context";
 import PlayerPage from "../components/MusicPlayer/PlayerPage";

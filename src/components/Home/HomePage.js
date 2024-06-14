@@ -10,11 +10,8 @@ import Footer from "../Footer/Footer";
 function HomePage() {
   return (
     <Box>      
-      <Box>
-        <Banner/>
-      </Box>
-
       <div>
+        <Banner />
         <Box className="mb-[32px] ">
           <SongData title={"Trending Songs"} />
           <SongData title={"New Songs"}/>
@@ -27,9 +24,6 @@ function HomePage() {
           <SongData title={"Top Playlist"} />
           <SongData title={"Top Artists"} />
         </Box>
-      </div>
-
-      <div>
         <Footer/>
       </div>
     </Box>

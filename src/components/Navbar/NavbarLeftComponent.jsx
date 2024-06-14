@@ -14,11 +14,13 @@ function NavbarLeftComponent() {
   const userData = useSelector(userSelector);
   const user = userData ? userData.data : null;
 
+
   const handleModal = () => {
-    if (openModal && isUpdatePassword) {
-      setIsUpdatePassword(false);
-    }
     setOpenModal((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    dispatch(deleteUser());
   };
 
   const { theme, toggleTheme } = useTheme();
@@ -72,7 +74,7 @@ function NavbarLeftComponent() {
               </div>
             ) : (
               <span
-                className="hover:opacity-60 cursor-pointer flex hidden min-[800px]:block"
+                className="hover:opacity-60 cursor-pointer hidden min-[800px]:block"
                 onClick={() => !user && handleModal()}
               >
                 <div
@@ -138,7 +140,7 @@ function NavbarLeftComponent() {
 
             <li class="nav-item">
               <Link to="/subscription" class="nav-link">
-                {user ? null : (
+                {user ? (<div> Get Gaana Plus </div>) : (
                   <span
                     className="hover:opacity-60 cursor-pointer flex hidden min-[800px]:block"
                     onClick={() => !user && handleModal()}
@@ -158,7 +160,10 @@ function NavbarLeftComponent() {
 
             <li class="nav-item">
               <Link to="/subscription" class="nav-link">
-                {user ? null : (
+                {user ? (<div><span className="bg-[#AA0000] text-white rounded-md p-1 text-xs font-bold">
+                        Welcome Offer
+                      </span>{" "}
+                      1 Month Trail @ Just ₹1 </div>) : (
                   <span
                     className="hover:opacity-60 cursor-pointer flex hidden min-[800px]:block"
                     onClick={() => !user && handleModal()}
@@ -233,8 +238,7 @@ function NavbarLeftComponent() {
               </Link>
             </li>
           </ul>
-        </div>
-        {openModal && (
+          {openModal && (
           <LoginModal
             open={openModal}
             handleModal={handleModal}
@@ -244,6 +248,8 @@ function NavbarLeftComponent() {
             setLoginPage={setLoginPage}
           />
         )}
+        </div>
+       
       </div>
     </>
   );

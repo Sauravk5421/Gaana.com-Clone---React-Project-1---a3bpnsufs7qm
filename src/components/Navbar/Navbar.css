@@ -3,8 +3,6 @@ body{
     margin: 0;
     padding: 0;
     font-family: proximanova-regular-webfont,Arial,sans-serif;
-    font-size: 1rem;
-    text-align: left;
     overflow-x: hidden;
     margin-top: 100px;
 }
@@ -15,9 +13,9 @@ body{
 }
 
 .logoImg{
-    width: 93px;
-    height: 22px;
-    margin-left: 20px;
+  max-width: 100px;
+  min-width: 100px;
+  margin-left: 10px;
 }
 
 .navbar-expand{
@@ -35,22 +33,24 @@ body{
 
 .welcomeOffer button {
     background-color: red;
-    font-size: 7px;
+    font-size: 8px;
     font-weight: bold;
     color: white;
     border-radius: 25px;
-    padding: 5px 15px 5px 15px;
+    padding: 5px 0px 5px 0px;
     margin: 0 5px 0 5px;
+    width: 155px;
 }
 
 .gannaOffer button {
-    font-size: .8vw;
+    font-size: 8px;
     font-weight: bold;
     border-radius: 25px;
-    padding: 5px 15px 5px 15px;
+    padding: 5px 0px 5px 0px;
     color: red;
     border: 1px solid red;
     margin: 0 5px 0 5px;
+    width: 90px;
 }
 
 .btn-lang{
@@ -151,6 +151,7 @@ body{
     margin-left: 10px;
   }
 
+
   .search-container input:focus{
     outline: none;
   }
@@ -164,8 +165,29 @@ body{
     font-size: large;
   }
 
+  .search-container-bottom input { 
+    text-indent: 35px;
+    padding: 4px;
+    width: 100%;
+    margin-top: 10px;
+   
+  }
+
+  .search-container-bottom input:focus{
+    outline: none;
+  }
+
+  .search-container-bottom .search-icon { 
+    position: absolute;
+    top: 54px;
+    left: 35px;
+    font-size: 15px;
+    color: #2c2b2b;
+    font-size: large;
+  }
+
   input::placeholder{
-    font-size: .9vw;
+    font-size: 10px;
     font-weight: lighter;
 }
 
@@ -204,12 +226,6 @@ body{
     padding: 2px;
   }
 
-  .toggle-label{
-    display: flex;
-    align-items: center;
-    margin: 0 5px 0 5px;
-   
-  }
 
   .toggle-input{
     position: absolute;

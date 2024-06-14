@@ -3,9 +3,10 @@ import "../Footer/Footer.css";
 import styled from "styled-components";
 import { useTheme } from "../Context/Context";
 
-
+//color: #c0c0c0;
 const FooterLink = styled.a`
-  color: #c0c0c0;
+  
+  color: #8E8E93;
   font-size: 11px;
   text-decoration: none;
 
@@ -99,7 +100,7 @@ function Footer() {
 
         <Box className="text-center py-2">Quicklinks</Box>
         <Box>
-          <Box className="flex justify-evenly pb-4">
+          <Box className="flex justify-evenly pb-4 min-w-20">
             <Box className="">
               <Box className="py-2">
                 <span>Albums</span>
@@ -623,7 +624,7 @@ function Footer() {
           </Box>
         </Box>
         <hr />
-        <Box className="flex justify-center text-xs text-[#C0C0C0] pt-2 pb-[10%]">
+        <Box className="flex justify-center text-xs text-[#8E8E93] pt-2 pb-[10%]">
           <p>© Entertainment Network India Ltd. 2024, All Rights Reserved</p>
         </Box>
       </Box>
